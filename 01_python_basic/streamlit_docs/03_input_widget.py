@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 st.set_page_config(page_title="Input Widget", layout="wide")
-
+# streamlit  run  03_input_widget.py
 ################################################################
 # 위젯(Widget): 버튼, 텍스트박스 등과 같이 사용자가 직접 상호작용하는 개별 GUI 구성요소.
 # 컨테이너(Container): 여러 위젯을 포함하고 배치(layout)/정렬을 관리하는 GUI 구성요소.
@@ -12,7 +12,8 @@ st.set_page_config(page_title="Input Widget", layout="wide")
 ################################################################
 st.subheader("text 입력")
 name_value = st.text_input("이름")
-st.write("이름: " + name_value)
+if name_value:
+    st.write("이름: " + name_value)
 
 st.subheader("여러줄 텍스트 입력")
 info = st.text_area("정보", height=200)  #height: pixcel
@@ -42,6 +43,7 @@ st.subheader("일반 버튼")
 
 ##### 일반버튼: click 하면 True 반환
 bool_value = st.button("인사말 출력")
+print(bool_value)
 if not bool_value:
     st.write("아직 클릭 안됨")
 else:

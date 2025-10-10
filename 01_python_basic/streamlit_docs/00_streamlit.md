@@ -63,3 +63,6 @@ Streamlit 실행 옵션 (Command Line Flags)
 | `streamlit config show` | 현재 Streamlit 설치에 적용된 모든 구성 옵션을 표시 |
 | `streamlit version` | 설치된 Streamlit 버전 확인 |
 | `streamlit cache clear` | 디스크에 저장된 모든 캐시 데이터를 제거|
+
+### 설치
+`pip install streamlit`
