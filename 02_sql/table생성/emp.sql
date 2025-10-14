@@ -1,3 +1,5 @@
+use testdb;
+
 DROP TABLE IF EXISTS emp;
 CREATE TABLE emp(
     emp_id 		INT PRIMARY KEY,
@@ -118,3 +120,7 @@ INSERT INTO emp (emp_id,emp_name,job,mgr_id,hire_date,salary,comm_pct,dept_name)
 INSERT INTO emp (emp_id,emp_name,job,mgr_id,hire_date,salary,comm_pct,dept_name) VALUES (204,'Hermann','PR_REP',101,CAST('02-06-07' AS DATE),10000,null,'Public Relations');
 INSERT INTO emp (emp_id,emp_name,job,mgr_id,hire_date,salary,comm_pct,dept_name) VALUES (205,'Shelley','AC_MGR',101,CAST('02-06-07' AS DATE),12008,null,'Accounting');
 INSERT INTO emp (emp_id,emp_name,job,mgr_id,hire_date,salary,comm_pct,dept_name) VALUES (206,'William','AC_ACCOUNT',205,CAST('02-06-07' AS DATE),8300,null,'Accounting');
+
+
+select * from emp;
+
