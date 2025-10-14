@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
+
+# streamlit run 05_sidebar.py
 ############################################################
 # sidebar에는 검색 등 조건을 입력하는 항목들을 넣는다.
 # 본화면에서는 sidebar에서 선택한 내용을 처리한 내용을 넣는다.
@@ -15,7 +18,8 @@ v1 = st.sidebar.slider("X", 1, 10)
 st.write("선택된 값: ", f"**{v1}**")
 
 v2 = st.sidebar.text_input("이름")
-st.write("이름: " + f"**{v2}**")
+if v2:
+    st.write("이름: " + f"**{v2}**")
 
 v3 = st.sidebar.radio(
     "지역선택",
@@ -23,5 +27,6 @@ v3 = st.sidebar.radio(
     captions=["2020", "2020", "2023"],
     index=None,  # 아무것도 선택되지 않도록 한다.
 )
-
-st.write(f"선택한 지역: **{v3}**")
+if v3:
+    st.write(f"선택한 지역: **{v3}**")
+    # st.sidebar.write(v3)

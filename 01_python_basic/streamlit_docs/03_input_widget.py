@@ -17,7 +17,8 @@ if name_value:
 
 st.subheader("여러줄 텍스트 입력")
 info = st.text_area("정보", height=200)  #height: pixcel
-st.write(info.replace("\n", "<br>"), unsafe_allow_html=True)
+if info:
+    st.write(info.replace("\n", "<br>"), unsafe_allow_html=True)
 
 st.subheader("Number Input")
 num = st.number_input("값")
@@ -65,14 +66,17 @@ st.subheader("Select Box")
 option = st.selectbox(
     "지역을 선택하세요",
     ("서울", "인천", "부산", "광주"),
-    # index=None
+    index=None
 )
 st.write("**선택한 지역**:", option)
 
 ###### checkbox
 st.subheader("Checkbox")
+
 @st.cache_data
 def get_data():
+    # csv 파일을 읽어서 DataFrame(판다스의 표)로 생성(read_csv). 
+    # 앞 10개 행만 조회 (head(10))
     df = pd.read_csv("data/boston_housing.csv").head(10)
     return df
 
@@ -86,9 +90,9 @@ else:
 
 ####### file_uploader()
 st.subheader("파일 업로드 버튼")
-col4, col5 = st.columns(2)
+# col4, col5 = st.columns(2)
 
-uploaded_file = col4.file_uploader(
+uploaded_file = st.file_uploader(
     "이미지 업로드", 
     type=["png", "jpg"],           # 업로드 파일 확장자 제한. (생략하면 모든 확장자의 파일을 다 업로드 할 수있다.)
     accept_multiple_files=False    # True 설정 시 한번에 여러개 파일 업로드 가능.
@@ -105,11 +109,15 @@ if uploaded_file is not None:
     # UploadFile.getvalue(): 업로드된 파일을 bytes로 반환
     # UploadFile.name      : 업로드된 파일이름 반환.
     bytes_data = uploaded_file.getvalue()
+    
+    # 저장할 경로
     save_filepath = os.path.join(save_dir, uploaded_file.name)
+    # 업로드된 파일 저장.
     with open(save_filepath, "wb") as fw:
         fw.write(bytes_data)
     st.write(uploaded_file.name)
     st.write("타입:" + str(type(bytes_data)))
+    
     #################### 업로드 이미지 화면에 출력 (bytes to PIL.Image)
     data_io = io.BytesIO(bytes_data)
     img = Image.open(data_io)
@@ -126,7 +134,7 @@ for uploaded_file in upload_file_list:
     with open(os.path.join(save_dir, uploaded_file.name), "wb") as fw:
         fw.write(bytes_data)
 
-
+   
 ##### 다운로드 버튼
 st.subheader("다운로드 버튼")
 down_filepath = "data/boston_housing.csv"
@@ -135,6 +143,7 @@ with open(down_filepath, "rb") as fr:
         "파일 다운로드",                             # Button Label
         data=fr.read(),                             # 다운로드 시킬 파일 content. (str or bytes)
         file_name=os.path.basename(down_filepath),  # 다운 로드 될때 파일명 (경로일 경우)
-    )
+        # os.path.basename("경로") 경로에서 마지막 경로(basename)을 반환.
+    ) 
 
 
